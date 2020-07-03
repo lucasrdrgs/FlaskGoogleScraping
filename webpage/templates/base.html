@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+		<title>{% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="static/css/style.css">
+		{% for x in ['jquery', 'popper', 'bootstrap'] %}
+		<script src="static/js/{{ x }}.min.js"></script>
+		{% endfor %}
+	</head>
+	<body>
+		<div class="mx-auto col-6 mt-5">
+			{% block content %}
+			{% endblock %}
+		</div>
+		{% block scripts %}
+		{% endblock %}
+		<br style="margin-bottom: 20pt;">
+	<body>
+</html>

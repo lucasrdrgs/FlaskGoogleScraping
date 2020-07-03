@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Google Search API - Homepage{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4 display-4">Google Search API</h2>
+<p class="lead">
+	This Google Search API will look for the first N Google Search results and will fetch their images and relevant content based on user-defined criteria. Below the API's URL are the parameters expected by the API.
+</p>
+<p class="text-left">
+	URL format:
+	<span class="param-hl">
+		<span id="page-url">http://thispage.tld</span>/api/{{ api_url|safe }}
+	</span>
+	<p>
+		<b class="text-danger">
+			If you want to use Google Search by Image, send the image's URL
+			through GET parameter <code class="param-hl">image</code>.
+		</b>
+		Example: <span class="mono">&lt;api-url&gt;/?image=your-image-url</span>
+	</p>
+</p>
+<table class="table table-bordered text-justify mx-auto">
+	<thead class="text-center">
+		<tr>
+			<th class="align-middle">Parameter</th>
+			<th class="align-middle">Possible values</th>
+			<th class="align-middle">What it means</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for param in params %}
+			<tr class="text-center align-middle">
+				<td class="align-middle param col-sm-auto param" style="white-space: nowrap;">{{ param }}</td>
+				<td class="align-middle param col-sm-auto param">{{ params[param][0]|join(', ') }}</td>
+				<td class="align-middle col-sm-auto text-justify">{{ params[param][1]|safe }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+	function setURL() {
+		let e = document.getElementById('page-url');
+		e.innerHTML = window.location.href;
+		let splt = window.location.href.split('/');
+		let protocol = splt[0];
+		let url = splt[2];
+		e.innerHTML = protocol + '//' + url;
+	}
+	setURL();
+</script>
+{% endblock %}
